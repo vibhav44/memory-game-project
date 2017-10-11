@@ -20,8 +20,6 @@ $(document).ready(function () {
 
 //this function is called whenever a tile is clicked
 $(".square").click(function(){
-      moves++;
-      $("#movecount").html(moves);
       flipOpen(this);
   });
 
@@ -36,10 +34,12 @@ function flipOpen(obj) {
   var TileId=obj.id;
   if(!match(TileId,matchedCardsNo)){
     if(openCards.length==0){
+      ++moves;
       openCards.push(TileId);
     }else if(openCards.length==1){
       if(TileId!=openCards[0]){
         openCards.push(TileId);
+        ++moves;
         var y1=openCards[0];
         var y2=openCards[1];
         if(array[y1]==array[y2]){
@@ -48,17 +48,21 @@ function flipOpen(obj) {
           openCards.length=0;
       }
     }
-  }else if(openCards.length==2){
+  }else if(openCards.length==2 &&(TileId!=openCards[0] && TileId!=openCards[1])){
+      moves++;
       flipBack(openCards[0],openCards[1]);
       openCards.length=0;
       openCards.push(TileId);
+
   }
+
   var x1="#"+TileId;
   symbolFile=searchSymbol(TileId);
   var fileName="img/"+symbolName[symbolFile]+".png";
   $(x1).css("background-image","url("+fileName+")");
 
 }
+  $("#movecount").html(moves);
   if(matchedCardsNo.length==16){
     alert("Congratulations !!!! You have completed the game.\nTime taken :"+countSecs+"\nTotal moves : "+moves+"\nStars : "+noOfStars);
     var ans=confirm("play again");
@@ -110,10 +114,8 @@ function updateGame() {
     noOfStars=3;
   else if(moves<=30)
     noOfStars=2;
-  else if(moves<=40)
-    noOfStars=1;
   else
-    noOfStars=0;
+    noOfStars=1;
 
   var starInsert=$("#stars").html(noOfStars+" Stars");
 
