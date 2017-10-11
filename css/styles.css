@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0;
+  background-image: url("../img/puzzle.jpg");
+}
+
+.starPhoto {
+  height= 20px;
+  width= 20px;
+}
+
+#timer #time {
+  padding-left: 50px;
+}
+
+.area {
+  max-width: 525px;
+  max-height: 650px;
+}
+
+.square {
+    float:left;
+    position: relative;
+    width: 22.5%;
+    padding-bottom : 22.5%;
+    margin:1.25%;
+    background-image:url("../img/TileIcon.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    overflow:hidden;
+    vertical-align: middle;
+}
